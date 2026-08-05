@@ -1,5 +1,6 @@
 import { Component, computed, contentChild, input } from '@angular/core';
-import { FormField } from '@angular/forms/signals';
+import { createMetadataKey, FormField } from '@angular/forms/signals';
+import { MIN_WORDS } from '../../schemas/min-words-validator';
 
 @Component({
   selector: 'app-field-wrapper',
@@ -7,10 +8,14 @@ import { FormField } from '@angular/forms/signals';
   templateUrl: './field-wrapper.html',
   styleUrl: './field-wrapper.scss',
 })
+
 export class FieldWrapper<T> {
   readonly label = input('');
   readonly fieldDirective = contentChild.required(FormField<T>);
   readonly fieldState = computed(() => this.fieldDirective().state());
   readonly errors = computed(() => this.fieldState().errors());
   readonly required = computed(() => this.fieldState().required());
+  readonly hasMinWords = computed(() => this.fieldState().hasMetadata(MIN_WORDS));
+
+  readonly minWords = computed(() => this.hasMinWords() ? this.fieldState().metadata(MIN_WORDS)!() : 0,);
 }

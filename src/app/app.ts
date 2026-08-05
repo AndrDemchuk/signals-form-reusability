@@ -10,15 +10,14 @@ import {
   FormRoot,
   required,
   TreeValidationResult,
-  validate,
   ValidationError
 } from '@angular/forms/signals';
 import { DinnerReview } from './models/dinner-review.model';
+import { minWords } from './schemas/min-words-validator';
+import { reviewItemSchema } from './schemas/review-item-schema';
 import { ReviewErrors, ReviewsService } from './services/reviews-service';
 import { FieldWrapper } from './shared/field-wrapper/field-wrapper';
 import { ReviewItemForm } from './shared/review-item-form/review-item-form';
-import { reviewItemSchema } from './schemas/review-item-schema';
-import { minWords } from './schemas/min-words-validator';
 
 @Component({
   selector: 'app-root',
