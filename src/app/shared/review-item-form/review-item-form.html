@@ -1,0 +1,11 @@
+@let form = fieldTree();
+<h4>{{header()}}</h4>
+<app-field-wrapper label="Rating">
+  <app-star-rating [formField]="form.rating" />
+  <app-field-wrapper label="Recomendation">
+    <select [formField]="form.recommendation">
+      <option value="no-opinion">No Opinion</option>
+      <option value="recommend">Would Recommend</option>
+      <option value="not-recommend">Would Not Recommend</option>
+    </select>
+  </app-field-wrapper>
