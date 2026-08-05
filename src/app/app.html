@@ -1,0 +1,45 @@
+@if (submittedSuccessfully()) {
+<div class="success-box">Form was submitted successfully</div>
+}
+
+<form [formRoot]="reviewForm">
+  <h3>Dinner Review Form</h3>
+  <app-field-wrapper label="Username">
+    <input type="text" [formField]="reviewForm.username" />
+  </app-field-wrapper>
+
+  <app-field-wrapper label="Role">
+    <select [formField]="reviewForm.role">
+      <option value="user">User</option>
+      <option value="author">Author</option>
+      <option value="chef">Chef</option>
+    </select>
+  </app-field-wrapper>
+
+  @if (!reviewForm.email().hidden()) {
+  <app-field-wrapper label="Email">
+    <input type="email" [formField]="reviewForm.email" />
+  </app-field-wrapper>
+  }
+
+  <app-field-wrapper label="Description">
+    <textarea [formField]="reviewForm.description"></textarea>
+  </app-field-wrapper>
+
+  <app-review-item-form header="food" [fieldTree]="reviewForm.food" />
+  <app-review-item-form header="service" [fieldTree]="reviewForm.service" />
+
+
+  <button type="submit" [disabled]="reviewForm().submitting()">
+    @if (reviewForm().submitting()) {
+    Submitting
+    } @else {
+    Submit
+    }
+  </button>
+</form>
+
+<div class="model">
+  <h3>Model Value</h3>
+  <pre><code>{{ model() | json }}</code></pre>
+</div>
